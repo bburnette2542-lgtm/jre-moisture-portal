@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useReplaceSnapshot } from "@/hooks/useLiveSnapshot";
 import type { AlertItem, Role, Snapshot } from "@/lib/types";
 import { SampleTag } from "./SampleTag";
@@ -29,6 +30,8 @@ export function AlertCard({
   hrefBase: string;
 }) {
   const replace = useReplaceSnapshot();
+  const pathname = usePathname();
+  const onOpsDesk = role === "ops" && pathname.startsWith("/ops");
   const run = async (action: "acknowledge" | "dispatch" | "clear") => {
     const response = await fetch(`/api/ops/alerts/${alert.id}`, {
       method: "POST",
@@ -55,7 +58,7 @@ export function AlertCard({
           <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${statusTone[alert.status]}`}>
             {alert.status}
           </span>
-          {role === "ops" ? (
+          {onOpsDesk ? (
             <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.08em] uppercase ${triageTone[alert.triage]}`}>
               {alert.triage}
             </span>
@@ -75,7 +78,7 @@ export function AlertCard({
           </li>
         ))}
       </ul>
-      {role === "ops" && alert.status === "Open" ? (
+      {onOpsDesk && alert.status === "Open" ? (
         <div className="mt-4 flex flex-wrap gap-2">
           <button
             type="button"
@@ -100,7 +103,7 @@ export function AlertCard({
           </button>
         </div>
       ) : null}
-      {role === "ops" && alert.dispatchedTo ? (
+      {onOpsDesk && alert.dispatchedTo ? (
         <p className="mt-3 text-xs text-navy">
           Crew: {alert.dispatchedTo} · {alert.dispatchedAt}
         </p>
