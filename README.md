@@ -1,19 +1,37 @@
-# James River Exteriors · Owner Portal
+# James River Exteriors · Moisture portal
 
-Polished **Next.js App Router + Tailwind** mock of the James River Exteriors moisture-monitoring owner portal.
+Next.js App Router + Tailwind **JRE-owned** moisture monitor for **Virginia Home 725-011 — Last Wing**.
 
-**This is CONCEPT / SAMPLE DATA.** It is not live telemetry, not a bid, and not a guarantee. Every screen is marked as a sample. There is no real authentication and no real secrets.
+**CONCEPT / SAMPLE DATA.** Readings are simulated until a partner-sensor API exists. This is not a bid, not a guarantee, and not live field telemetry. No real secrets.
 
-The portal is **100% JRE-branded**. This mock is the **owner / GC read-only view** for **Virginia Home 725-011 — Last Wing** pilot. Owners can see pin status, sample readings, trends, and that JRE was notified. There is no “Dispatch repair” control — that stays with JRE operations.
+## Two views
 
-## Screens
+| Path | Who | What they see |
+| --- | --- | --- |
+| `/portal` | Owner / GC | Pins, trends, alerts, **JRE notified**. No Dispatch. |
+| `/ops` | JRE desk | Same data plus triage, who was notified, **Dispatch repair**. |
 
-1. Login / landing — sample demo enter (no real auth)
-2. Job overview — project, last wing, OK / Watch / Alert chips
-3. Wing plan map — labeled pins S1–S12
-4. Sensor detail — sample temp, RH, moisture, and 30-day trends
-5. Alerts — sample list with status + “JRE notified”
-6. About — sensors in the wall; JRE hosts the portal and the data
+Landing (`/`) is a sample demo enter — no real auth.
+
+## SAMPLE ingest (JRE server layer)
+
+The portal never talks to OmniSense, Detec, SMT, or Sensocon.
+
+1. `GET /api/snapshot` pulls the active adapter and writes into the in-memory **sensor store** and **alert store**.
+2. The dashboard polls that snapshot every 5 seconds so pins and charts feel alive.
+3. The default adapter is `server/ingest/sample-adapter.ts` (time-based SAMPLE drift).
+4. Vendor stubs live next to it. When quotes land, implement `pullReadings()` and set:
+
+```bash
+JRE_INGEST_ADAPTER=sample   # default
+# later: omnisense | detec | smt
+```
+
+Adapter contract: `server/ingest/types.ts` (`VendorIngestAdapter`). Store: `server/store.ts`. Ops mutations: `POST /api/ops/alerts/:id` with `{ "action": "acknowledge" | "dispatch" | "clear" }` — **ops cookie only**.
+
+`GET /api/ingest` reports which adapter is active.
+
+In-memory store is process-local (fine on a warm Vercel instance). It resets on cold start. That is expected until a real JRE database is added.
 
 ## Run locally
 
@@ -22,17 +40,19 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) and choose **Enter sample portal**.
+Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
 npm run build
 npm start
 ```
 
-## Deploy
-
-This repo is linked to Vercel as **jre-moisture-portal**. Framework is Next.js; `vercel.json` is included.
-
-Live mock (SAMPLE / CONCEPT):
+## Live URL
 
 - https://jre-moisture-portal.vercel.app
+
+## Screens
+
+Owner: overview, wing plan (S1–S12), sensor detail + 30-day trends, alerts, about.
+
+Ops: desk queue, same map/detail, Dispatch repair, notified list.

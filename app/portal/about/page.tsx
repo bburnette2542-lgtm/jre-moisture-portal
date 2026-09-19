@@ -41,10 +41,10 @@ export default function AboutPage() {
       <section className="rounded-2xl border border-navy/8 bg-white p-6 shadow-sm">
         <h2 className="font-serif text-xl text-navy">What this read-only view includes</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-muted">
-          <li>Live-looking pins, sample trends, and alert history for Virginia Home 725-011.</li>
-          <li>Status chips: OK, Watch, and Alert.</li>
+          <li>Live SAMPLE pins, trends, and alert history for Virginia Home 725-011.</li>
+          <li>Status chips: OK, Watch, and Alert. The dashboard polls the JRE store every few seconds.</li>
           <li>Notice when JRE has been notified. The JRE desk owns triage.</li>
-          <li>No “Dispatch repair” control. That stays with James River operations.</li>
+          <li>No “Dispatch repair” control. That stays with James River operations on /ops.</li>
         </ul>
       </section>
 

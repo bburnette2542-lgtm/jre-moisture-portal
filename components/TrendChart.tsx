@@ -47,7 +47,9 @@ export function TrendChart({
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="font-serif text-lg text-navy">{label}</p>
-          <p className="text-xs text-muted">30-day sample trend · not live telemetry</p>
+          <p className="text-xs text-muted">
+            30-day SAMPLE trend · last point tracks the live ingest tick
+          </p>
         </div>
         <SampleTag />
       </div>
@@ -78,6 +80,14 @@ export function TrendChart({
         })}
         <path d={area} fill={accent} fillOpacity="0.12" />
         <path d={line} fill="none" stroke={accent} strokeWidth="2.5" />
+        {values.length > 0 ? (
+          <circle
+            cx={pad + (values.length - 1) * ((width - pad * 2) / Math.max(values.length - 1, 1))}
+            cy={pad + (height - pad * 2) - (Math.min(values.at(-1) ?? 0, max) / max) * (height - pad * 2)}
+            r="4.5"
+            fill={accent}
+          />
+        ) : null}
         {thresholdY !== null ? (
           <>
             <line

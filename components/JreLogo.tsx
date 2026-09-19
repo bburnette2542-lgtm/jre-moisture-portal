@@ -1,9 +1,11 @@
 export function JreLogo({
   compact = false,
   light = false,
+  kicker,
 }: {
   compact?: boolean;
   light?: boolean;
+  kicker?: string;
 }) {
   const ink = light ? "text-white" : "text-navy";
   const sub = light ? "text-gold-soft/80" : "text-teal";
@@ -28,7 +30,7 @@ export function JreLogo({
           James River Exteriors
         </p>
         <p className={`text-[10px] font-semibold tracking-[0.18em] uppercase ${sub}`}>
-          {compact ? "Owner portal" : "Owner portal · Moisture monitor"}
+          {kicker ?? (compact ? "Owner portal" : "Owner portal · Moisture monitor")}
         </p>
       </div>
     </div>

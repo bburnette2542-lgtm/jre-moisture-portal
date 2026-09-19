@@ -14,16 +14,16 @@ export async function generateMetadata({
   const { id } = await params;
   const sensor = getSensor(id);
   return {
-    title: sensor ? `Sensor ${sensor.id}` : "Sensor",
+    title: sensor ? `Ops · ${sensor.id}` : "Ops sensor",
   };
 }
 
-export default async function SensorDetailPage({
+export default async function OpsSensorPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   if (!getSensor(id)) notFound();
-  return <SensorLiveView id={id} role="owner" />;
+  return <SensorLiveView id={id} role="ops" />;
 }

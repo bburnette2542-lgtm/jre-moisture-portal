@@ -1,4 +1,4 @@
-import type { AlertItem, Sensor, SensorStatus } from "./types";
+import type { AlertItem, Notification, Sensor, SensorStatus } from "./types";
 
 export const JOB = {
   name: "Virginia Home 725-011",
@@ -234,6 +234,13 @@ export const SENSORS: Sensor[] = [
   },
 ];
 
+function notified(at: string, extra: Notification[] = []): Notification[] {
+  return [
+    { name: "Brian Burnette", role: "JRE desk", channel: "desk", at },
+    ...extra,
+  ];
+}
+
 export const ALERTS: AlertItem[] = [
   {
     id: "a-918",
@@ -242,9 +249,13 @@ export const ALERTS: AlertItem[] = [
     type: "Moisture",
     value: "18.2%",
     status: "Open",
+    triage: "new",
     deskNote: "JRE notified",
     summary:
       "Moisture crossed the 16% sample threshold at Last Wing · Window bay 3 · Base of wall.",
+    notified: notified("Sep 18, 2026 · 06:14 ET", [
+      { name: "Gilbane / Owner", role: "Owner copy", channel: "portal", at: "Sep 18, 2026 · 06:14 ET" },
+    ]),
   },
   {
     id: "a-912",
@@ -253,8 +264,10 @@ export const ALERTS: AlertItem[] = [
     type: "RH",
     value: "62%",
     status: "Cleared",
+    triage: "cleared",
     deskNote: "JRE notified",
     summary: "Relative humidity watch at Window bay 2 · Window head. Sample event later cleared.",
+    notified: notified("Sep 12, 2026 · 14:02 ET"),
   },
   {
     id: "a-905",
@@ -263,8 +276,10 @@ export const ALERTS: AlertItem[] = [
     type: "Moisture",
     value: "15.1%",
     status: "Cleared",
+    triage: "cleared",
     deskNote: "JRE notified",
     summary: "East penetration moisture approached threshold. Sample event later cleared.",
+    notified: notified("Sep 5, 2026 · 09:41 ET"),
   },
   {
     id: "a-828",
@@ -273,8 +288,10 @@ export const ALERTS: AlertItem[] = [
     type: "Temp",
     value: "48°F",
     status: "Info",
+    triage: "info",
     deskNote: "Logged",
     summary: "Night temperature dip at north roof-to-wall. Informational sample only.",
+    notified: [{ name: "JRE desk", role: "Log only", channel: "desk", at: "Aug 28, 2026 · 22:18 ET" }],
   },
   {
     id: "a-821",
@@ -283,8 +300,10 @@ export const ALERTS: AlertItem[] = [
     type: "Moisture",
     value: "14.8%",
     status: "Cleared",
+    triage: "cleared",
     deskNote: "JRE notified",
     summary: "Earlier moisture rise at Window bay 3 · Base of wall. Sample event later cleared.",
+    notified: notified("Aug 21, 2026 · 11:05 ET"),
   },
 ];
 
@@ -294,8 +313,8 @@ export function getSensor(id: string): Sensor | undefined {
   return SENSORS.find((sensor) => sensor.id.toLowerCase() === id.toLowerCase());
 }
 
-export function statusCounts() {
-  return SENSORS.reduce(
+export function statusCounts(sensors: Sensor[] = SENSORS) {
+  return sensors.reduce(
     (acc, sensor) => {
       acc[sensor.status] += 1;
       return acc;

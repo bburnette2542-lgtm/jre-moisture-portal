@@ -52,6 +52,21 @@ body {
   background-size: 24px 24px;
 }
 
+.pin-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pin-pulse 1.8s ease-out infinite;
+}
+
+@keyframes pin-pulse {
+  0% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .login-haze {
   background:
     radial-gradient(circle at 15% 20%, rgba(26, 107, 107, 0.28), transparent 36%),

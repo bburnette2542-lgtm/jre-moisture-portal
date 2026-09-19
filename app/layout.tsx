@@ -20,11 +20,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "James River Exteriors · Owner Portal",
-    template: "%s · JRE Owner Portal",
+    default: "James River Exteriors · Moisture Portal",
+    template: "%s · JRE Portal",
   },
   description:
-    "James River Exteriors owner portal mock for last-wing moisture monitoring. CONCEPT / SAMPLE DATA only.",
+    "James River Exteriors moisture portal: owner read-only view and internal ops desk. CONCEPT / SAMPLE DATA only.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
