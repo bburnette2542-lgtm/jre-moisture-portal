@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #0b2c4a;
+  --navy-deep: #071c30;
+  --navy-mid: #133a5c;
+  --teal: #1a6b6b;
+  --teal-soft: #e4f1f1;
+  --gold: #c4a35a;
+  --gold-soft: #f6eedc;
+  --paper: #f4f1ea;
+  --ink: #16202c;
+  --muted: #5b6774;
+  --ok: #1f7a4d;
+  --watch: #b8860b;
+  --alert: #b42318;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-mid: var(--navy-mid);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-ok: var(--ok);
+  --color-watch: var(--watch);
+  --color-alert: var(--alert);
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-source-serif);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+.drawing-grid {
+  background-image:
+    linear-gradient(rgba(11, 44, 74, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 44, 74, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.login-haze {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(26, 107, 107, 0.28), transparent 36%),
+    radial-gradient(circle at 88% 10%, rgba(196, 163, 90, 0.16), transparent 28%),
+    radial-gradient(circle at 70% 90%, rgba(26, 107, 107, 0.18), transparent 32%),
+    linear-gradient(165deg, #071c30 0%, #0b2c4a 52%, #0a243c 100%);
+}
