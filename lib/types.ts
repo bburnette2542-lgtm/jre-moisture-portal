@@ -11,7 +11,7 @@ export type Sensor = {
   moisture: number;
   lastReading: string;
   x: number;
-  y: number;
+  y: number; // SVG coordinates in the 1000×560 wing plan
   moistureTrend: number[];
   tempTrend: number[];
   rhTrend: number[];

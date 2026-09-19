@@ -31,8 +31,11 @@ npm start
 
 ## Deploy
 
-Connect this GitHub repo to [Vercel](https://vercel.com/new) and deploy. Framework is Next.js; `vercel.json` is included.
+This repo is linked to Vercel as **jre-moisture-portal**. Framework is Next.js; `vercel.json` is included.
 
-If a preview URL is published from this work, it will be listed here:
+Live mock (SAMPLE / CONCEPT):
 
-- Preview: connect the repo to Vercel → Deploy (no live preview URL from this environment yet)
+- https://jre-moisture-portal-bburnette2542-6040s-projects.vercel.app
+- Branch preview: https://jre-moisture-portal-git-cur-a31975-bburnette2542-6040s-projects.vercel.app
+
+If those URLs ask for Vercel login, open the project in Vercel and confirm Deployment Protection is off for this public sample, or connect the repo at [vercel.com/new](https://vercel.com/new) and Deploy.

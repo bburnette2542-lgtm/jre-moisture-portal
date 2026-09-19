@@ -28,9 +28,9 @@ export default function OverviewPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <StatusChip status="ok" count={counts.ok} />
-            <StatusChip status="watch" count={counts.watch} />
-            <StatusChip status="alert" count={counts.alert} />
+            <StatusChip status="ok" count={counts.ok} onDark />
+            <StatusChip status="watch" count={counts.watch} onDark />
+            <StatusChip status="alert" count={counts.alert} onDark />
           </div>
         </div>
         <div className="mt-5 flex flex-wrap gap-2 text-xs">

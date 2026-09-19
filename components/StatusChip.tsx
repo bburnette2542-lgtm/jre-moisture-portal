@@ -7,16 +7,24 @@ const styles: Record<SensorStatus, string> = {
   alert: "bg-alert/10 text-alert border-alert/20",
 };
 
+const darkStyles: Record<SensorStatus, string> = {
+  ok: "bg-ok text-white border-ok",
+  watch: "bg-gold text-navy border-gold",
+  alert: "bg-alert text-white border-alert",
+};
+
 export function StatusChip({
   status,
   count,
+  onDark = false,
 }: {
   status: SensorStatus;
   count?: number;
+  onDark?: boolean;
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${styles[status]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${onDark ? darkStyles[status] : styles[status]}`}
     >
       <span
         className={`h-1.5 w-1.5 rounded-full ${

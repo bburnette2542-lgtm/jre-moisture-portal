@@ -6,7 +6,7 @@ import { JOB } from "@/lib/sample-data";
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-full flex-col login-haze">
+    <div className="flex min-h-screen flex-col login-haze">
       <ConceptBanner />
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-10 sm:py-16">
         <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
